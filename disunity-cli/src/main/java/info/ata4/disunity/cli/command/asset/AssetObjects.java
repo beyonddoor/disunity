@@ -56,6 +56,11 @@ public class AssetObjects extends AssetTableCommand {
             table.append("Stripped");
         }
 
+        boolean debug = true;
+        if (debug) {
+            table.append("IsGO");
+        }
+
         metadata.objectInfoTable().infoMap().entrySet().stream().forEach(e -> {
             ObjectInfo info = e.getValue();
             table.row(e.getKey(), info.offset(), info.length(), info.typeID(),
@@ -73,6 +78,10 @@ public class AssetObjects extends AssetTableCommand {
 
             if (v3) {
                 table.append(((ObjectInfoV3) info).isStripped());
+            }
+
+            if (debug) {
+                table.append(info.typeID()==1?"GO":"");
             }
         });
 
